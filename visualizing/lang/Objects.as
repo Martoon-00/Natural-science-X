@@ -36,6 +36,10 @@ class lang.Objects {
 		
 		proto.forEach = function(f: Function) { iterate(this, f) }
 		
+		proto.equals = function(other: Object): Boolean {
+			return Objects.equals(this, other)
+		}
+		
 		proto.trace = function() { trace(this); return this }
 	
 		proto.defunc = function() { return this }
@@ -89,6 +93,14 @@ class lang.Objects {
 		for (var i = 0; i < arguments.length; i += 2) {
 			res[arguments[i]] = arguments[i + 1]
 		}
+		return res
+	}
+	
+	static function equals(a: Object, b: Object): Boolean {
+		if (a == undefined || b == undefined) return false
+		var res = true
+		Objects.iterate(a, function(name, value){ res = res && (value == b[name]) })
+		Objects.iterate(b, function(name, value){ res = res && (value == a[name]) })
 		return res
 	}
 }

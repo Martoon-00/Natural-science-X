@@ -14,15 +14,28 @@ class lang.Logger {
 	}
 	
 	function info(s: String) {
-		log(s)
+		var format = new TextFormat()
+		format.color = 0
+		log(s, format)
+	}
+	
+	function trace(s: String) {
+		var format = new TextFormat()
+		format.color = 0xA0A0A0
+		log(s, format)
+	}
+	
+	function error(s: String) {
+		var format = new TextFormat()
+		format.color = 0xFF0000
+		log(s, format)
 	}
 	
 	private function log() { 
-		for (var i = 0; i < appenders.length; i++) {  
+		for (var i = 0; i < appenders.length; i++) { 
 			appenders[i].apply(null, arguments)
 		}
 	}
-	
 	
 	function addAppender(f: Function) {
 		appenders.push(f)
