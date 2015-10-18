@@ -17,10 +17,15 @@ public class Server {
     public final URI BASE_URI;
 
     public static void main(String[] args) throws IOException {
+        if (args.length == 0) {
+            System.out.println("Missing first argument (port)");
+            return;
+        }
+        int port = Integer.parseInt(args[0]);
 
         Logger.getLogger("").setLevel(Level.OFF);
 
-        final Server server = new Server(12345);
+        final Server server = new Server(port);
         HttpServer httpServer = server.startServer();
         System.out.println(String.format("Server launched at %s", server.BASE_URI));
 

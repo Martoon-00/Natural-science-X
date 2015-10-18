@@ -1,14 +1,15 @@
 ﻿import net.*
 
 class net.UrlKeeper {
-	private var root: String
+	private var root
 	
-	function UrlKeeper(rootUrl: String) {
+	function UrlKeeper(rootUrl) {
 		root = rootUrl
 	}
 	
-	function request(path: String, parse: Function): Request {
-		return new Request(root + path)
+	function request(path: String, parse: Function): Request { 
+		var _this = this
+		return new Request(function(){ return _this.root.defunc() + path })
 			.setParser(parse)
 	}
 	
