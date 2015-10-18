@@ -8,6 +8,12 @@ class lang.Arrays {
 		proto.last = function() { return this[this.length - 1] }
 		
 		proto.remove = function(e) { Arrays.remove(this, e) }
+
+		proto.map = function(f) { 
+			var r = new Array()
+			for (var i in this) r[i] = f(this[i])
+			return r
+		}
 		
 		_global.ASSetPropFlags(proto, null, 0x7)
 	}

@@ -15,7 +15,8 @@ class lang.Objects {
 			return size() == 0
 		}
 	
-		proto.print = function(): Void {
+		proto.print = function(): Void { 
+			trace("<value> -> " + this)
 			iterate(this, function(name, value){ trace(name + " -> " + value) })
 			trace("---// end of print //---")
 		}
@@ -28,16 +29,19 @@ class lang.Objects {
 		}
 		
 		proto.copy = function(dist: Object) {
+			if (dist == undefined) dist = {}
 			iterate(this, function (name, value){ dist[name] = value })
 			return dist	
 		}
+		
+		proto.forEach = function(f: Function) { iterate(this, f) }
 		
 		proto.trace = function() { trace(this); return this }
 	
 		proto.defunc = function() { return this }
 		
-		
 		_global.ASSetPropFlags(proto, null, 0x7)
+
 	}
 	
 	

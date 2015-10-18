@@ -7,8 +7,15 @@ class lang.Functions {
 		
 		proto.defunc = function() { return this.apply(this, arguments) }
 		
-		_global.ASSetPropFlags(proto, null, 0x7)
+		proto.override = function(obj: Object, prop: String) {
+			var old = obj[prop]
+			var _this = this
+			obj[prop] = function() {
+				return _this.apply(this, new Array(old).concat(arguments))
+			}
+		}
 		
+		_global.ASSetPropFlags(proto, null, 0x7)
 		
 		_global.traceAll = function(){ trace(arguments.join("  ")) }
 	}
@@ -17,6 +24,17 @@ class lang.Functions {
 	static var WATCH_ARRAY = function(prop, oldVal, newVal) {
 		oldVal.push(newVal)
 		return oldVal
+	}
+	
+	static var UNWATCH_ONCE_DEFINED = function(f) {
+		return function(prop, oldVal, newVal) { 
+			if (newVal != undefined) {
+				this.unwatch(prop)
+				this[prop] = newVal
+				f(newVal)
+			}
+			return newVal
+		}
 	}
 
 	static function makeMultiListener(obj: Object, prop: String, listener: Function): Function {

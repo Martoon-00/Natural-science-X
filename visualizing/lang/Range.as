@@ -19,8 +19,9 @@ class lang.Range {
 	
 	function isEmpty(): Boolean { return a == b && Math.abs(a) == Number.POSITIVE_INFINITY }
 	
-	function bound(k: Number) {	return Math.min(b, Math.max(a, k)) }
-	function includes(k: Number) { return a <= k && b >= k }
+	function bound(k: Number): Number {	return Math.min(b, Math.max(a, k)) }
+	function includes(k: Number): Boolean { return a <= k && b >= k }
+	function length(): Number { return b - a }
 	
 	function norm(): Range { if (b < a) {a += b; b = a - b; a -= b}; return this }
 	private function check(): Range { return a <= b ? this : EMPTY }
@@ -50,6 +51,19 @@ class lang.Range {
 			var w = Math.floor(b)
 			for (var i = q; i >= w; i--) f(i) 
 		}
+	}
+	
+	function fill(step: Number) { 
+		if (step == 0 || step == undefined) 
+			throw new Error("Illegal step: " + step + "!")
+		if ((a < b) ^ (step > 0)) 
+			throw new Error("Wrong step direction!")
+			
+		var r = new Array()
+		for (var i = a; i <= b; i += step) { 
+			r.push(i)
+		}
+		return r
 	}
 	
 	function toString(): String { return Strings.format("[%s; %s]", a, b) }

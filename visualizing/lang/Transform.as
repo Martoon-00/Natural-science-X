@@ -31,6 +31,7 @@ class lang.Transform {
 	static function TURN(angle: Number) {
 		return new Transform(Math.cos(angle), Math.sin(angle), 0, -Math.sin(angle), Math.cos(angle), 0)
 	}
+	static function ROTATE(angle: Number) { return Transform.TURN(angle / 180 * Math.PI) }
 	
 	static function MOVE() {
 		var c = new Coord(arguments)
@@ -41,7 +42,8 @@ class lang.Transform {
 		return MOVE(-x, -y).then(TURN(angle)).then(MOVE(x, y))
 	}
 	
-	static function DILATATION(k: Number) {
-		return new Transform(k, 0, 0, 0, k, 0)
+	static function SCALE(x: Number, y: Number) {
+		if (y == undefined) y = x
+		return new Transform(x, 0, 0, 0, y, 0)
 	}
 }

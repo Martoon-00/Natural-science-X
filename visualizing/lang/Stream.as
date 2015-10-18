@@ -41,7 +41,7 @@
 	
 	function map(mapper:Function):Stream { // apples mapper to each value
 		var newValues = new Array()
-		forEach(function(){ newValues.push(mapper.call(this)) })
+		forEach(function(){ newValues.push(mapper.call(null, this)) })
 		return new Stream(newValues)
 	}
 	
@@ -53,18 +53,35 @@
 	}
 	
 	function toArray():Array {
-		return collect(new Array(), Array(null).concat);
+		return values.copy(new Array());
 	}
 	
 	function count(): Number {
 		return values.length
 	}
 	
+	function zipWith(other: Stream, f: Function): Stream {
+		var r: Array = new Array()
+		for (var i = 0; i < values.length; i++) {
+			r[i] = f(values[i], other.values[i])
+		}
+		return new Stream(r)
+	}
+	
 	static function generate(num:Number, generator:Function):Stream {
 		return new Stream(new Array(num)).map(generator)
 	}
 	
+	static function iterate(seed, next: Function, num: Number): Stream {
+		var a = new Array()
+		a.push(seed)
+		for (var i = 1; i < num; i++) a.push(next(a[i - 1]))
+		return new Stream(a)
+	}
 	
+	static function atRange(range: lang.Range, step: Number): Stream {
+		return iterate(range.a, function(k){ return k + step }, Math.floor(range.length() / step) + 1)
+	}
 	
 	static function CALL(f: Function) {
 		return f()

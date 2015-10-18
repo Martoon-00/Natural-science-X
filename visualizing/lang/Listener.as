@@ -26,4 +26,6 @@
 		listeners = new Array()
 	}
 	
+	function toString(): String { return lang.Strings.format("[Listener (%d entries)]", listeners.length) }
+	
 }

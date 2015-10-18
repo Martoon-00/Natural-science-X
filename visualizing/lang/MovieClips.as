@@ -37,6 +37,8 @@ class lang.MovieClips {
 			Functions.makeMultiListener(this, prop, listener)
 		}
 		
+		proto.notDead = function(){ return _target != "" }
+		
 		_global.ASSetPropFlags(proto, null, 0x7)
 	}
 	

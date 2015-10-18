@@ -5,6 +5,8 @@ class lang.Drawer {
 	private var mc: MovieClip
 	private var trans: Transform 
 	
+	private var hasPosition: Boolean = false
+	
 	function Drawer(mc: MovieClip) {
 		this.mc = mc
 		trans = Transform.E
@@ -23,9 +25,12 @@ class lang.Drawer {
 	function moveTo(): Drawer { 
 		var coord = new Coord(arguments)
 		mc.moveTo.call(mc, trans.applyX(coord.x, coord.y), trans.applyY(coord.x, coord.y))
+		hasPosition = true
 		return this
 	}
 	function lineTo(): Drawer { 
+		if (!hasPosition) return moveTo.apply(this, arguments)
+		
 		var coord = new Coord(arguments)
 		mc.lineTo.call(mc, trans.applyX(coord.x, coord.y), trans.applyY(coord.x, coord.y))
 		return this
@@ -35,12 +40,16 @@ class lang.Drawer {
 		return this
 	}
 	function lineStyle(): Drawer { mc.lineStyle.apply(mc, arguments); return this }
-	function clear(): Drawer { mc.clear.apply(mc, arguments); return this }
+	function clear(): Drawer { mc.clear.apply(mc, arguments); resetPos(); return this }
 	function beginFill(): Drawer { mc.beginFill.apply(mc, arguments); return this }
 	function beginGradientFill(): Drawer { mc.beginGradientFill.apply(mc, arguments); return this }
 	function endFill(): Drawer { mc.endFill.apply(mc, arguments); return this }
 	
 	function getMovieClip(): MovieClip { return mc }
+	
+	function apply(f: Function): Drawer { f(this); return this }
+	
+	function resetPos(): Drawer { hasPosition = false; return this }
 	
 	function rectangle(x1: Number, x2: Number, y1: Number, y2: Number): Drawer { 
 		moveTo(x1, y1)
