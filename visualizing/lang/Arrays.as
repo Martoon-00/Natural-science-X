@@ -11,12 +11,12 @@ class lang.Arrays {
 
 		proto.map = function(f) { 
 			var r = new Array()
-			for (var i in this) r[i] = f(this[i])
+			for (var i = 0; i < this.length; i++) r[i] = f(this[i])
 			return r
 		}
 		
 		proto.forEach = function(f) {
-			for (var i in this) f(i, this[i])
+			for (var i = 0; i < this.length; i++) f(i, this[i])
 		}
 		
 		proto.find = function(e) { return Arrays.find(this, e) }

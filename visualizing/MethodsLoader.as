@@ -7,7 +7,7 @@ class MethodsLoader {
 		_global.setTimeout(load, 0)
 	}
 	
-	static function load(onLoad: Function) {
+	static function load(onLoad: Function) { 
 		_global._rootUrl.request("methods", function(s){ return s.split("\n") })
 			.send(function(methods){ 
 				if (!Objects.equals(methods, _global._methods)) { 

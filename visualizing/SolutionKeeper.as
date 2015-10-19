@@ -31,7 +31,7 @@ class SolutionKeeper {
 		check()
 	}
 	
-	function check(): Void {
+	function check(): Void { 
 		var _this = this
 		
 		var p = params.copy({ 
