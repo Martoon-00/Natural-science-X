@@ -34,14 +34,14 @@ class diag.Diagram extends MovieClip {
 		var yAxis = createEmptyMovieClip("yAxis", 21)
 		
 		// grid
-		var gridParts = 5
+		var gridParts = 10
 		var gridAlpha = 30
 		xAxis.lineStyle(1, 0x00FF00, gridAlpha)
 		for (var i = 1; i < gridParts; i++) { 
 			new Drawer(xAxis)
 				.transform(Transform.MOVE(scale.x * i / gridParts, 0))
 				.moveTo(Coord.ZERO)
-				.lineTo(0, -size.y * 0.95)
+				.lineTo(0, -size.y * 0.98)
 		}
 		
 		yAxis.lineStyle(1, 0x00FF00, gridAlpha)
@@ -49,7 +49,7 @@ class diag.Diagram extends MovieClip {
 			new Drawer(yAxis)
 				.transform(Transform.MOVE(0, -scale.y * i / gridParts))
 				.moveTo(Coord.ZERO)
-				.lineTo(size.x * 0.95, 0)
+				.lineTo(size.x * 0.98, 0)
 		}
 		
 		// axis

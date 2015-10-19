@@ -15,6 +15,12 @@ class lang.Arrays {
 			return r
 		}
 		
+		proto.forEach = function(f) {
+			for (var i in this) f(i, this[i])
+		}
+		
+		proto.find = function(e) { return Arrays.find(this, e) }
+		
 		_global.ASSetPropFlags(proto, null, 0x7)
 	}
 	
@@ -36,7 +42,7 @@ class lang.Arrays {
 	}
 	
 	static function find(ar: Array, e: Object): String {
-		for (var i in ar) {
+		for (var i in ar) { 
 			if (ar[i] == e) return i
 		}
 		return null

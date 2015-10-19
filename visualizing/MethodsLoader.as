@@ -11,7 +11,7 @@ class MethodsLoader {
 		_global._rootUrl.request("methods", function(s){ return s.split("\n") })
 			.send(function(methods){ 
 				if (!Objects.equals(methods, _global._methods)) { 
-					new Logger("stage").trace("New methods available")
+					new Logger("stage").trace(methods.length + " methods available")
 					_global._methods = methods 
 					onLoad() 
 				}

@@ -1,16 +1,19 @@
 package ru.ifmo.methods;
 
-import ru.ifmo.methods.nonsence.NonMethod;
+import ru.ifmo.methods.nonsence.LolAppriximator;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class RegisteredSolvers {
-    public static Map<String, Solver> value = new HashMap<>();
+    public static Map<String, Solver> value = new TreeMap<>();
 
     static {
-        value.put("Logarithm striver", new NonMethod(0.1, (a) -> Math.log(a + 1)));
-        value.put("Logarithm striver (slow)", new NonMethod(0.02, (a) -> Math.log(a + 1)));
+        value.put("Logarithm striver", new LolAppriximator(0.1, (a) -> Math.log(a + 1)));
+        value.put("Logarithm striver (slow)", new LolAppriximator(0.02, (a) -> Math.log(a + 1)));
+        value.put("Power 2", new LolAppriximator(0.1, a -> a * a));
+        value.put("Power 5", new LolAppriximator(0.1, a -> Math.pow(a, 5)));
+        value.put("Square 2", new LolAppriximator(0.1, a -> Math.pow(a, 0.5)));
     }
 
 }

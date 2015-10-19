@@ -15,12 +15,12 @@ import java.util.stream.Stream;
 /**
  * In the course of time x(t) is getting more similar to f
  */
-public class NonMethod implements Solver {
+public class LolAppriximator implements Solver {
 
     private final double speed;
     private final Function<Double, Double> f;
 
-    public NonMethod(double speed, Function<Double, Double> f) {
+    public LolAppriximator(double speed, Function<Double, Double> f) {
         this.speed = speed;
         this.f = f;
     }

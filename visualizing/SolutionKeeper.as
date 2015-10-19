@@ -4,7 +4,7 @@ import globals.*
 
 class SolutionKeeper {
 	private static var CHECK_DELAY: Number = 300
-	private static var BLOCK_SIZE: Number = 10
+	private var BLOCK_SIZE: Number
 	
 	private var request: Request
 	private var params: Object
@@ -24,6 +24,7 @@ class SolutionKeeper {
 		
 		this.methods = methods
 		data = new Array()
+		BLOCK_SIZE = 50 / methods.length
 		
 		onUpdate = new Listener()
 		
