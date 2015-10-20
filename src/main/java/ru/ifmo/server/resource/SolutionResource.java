@@ -21,7 +21,7 @@ public class SolutionResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
     public String enumerateMethods() {
-        return RegisteredSolvers.value.keySet().stream()
+        return RegisteredSolvers.solvers.keySet().stream()
                 .collect(Collectors.joining("\n"));
     }
 
@@ -44,7 +44,7 @@ public class SolutionResource {
             StringBuilder answer = new StringBuilder();
 
             for (String method : methods.split(",")) {
-                Solver solver = RegisteredSolvers.value.get(method);
+                Solver solver = RegisteredSolvers.solvers.get(method);
                 if (solver == null)
                     throw new IllegalArgumentException(String.format("'%s' method is not registered", method));
 
