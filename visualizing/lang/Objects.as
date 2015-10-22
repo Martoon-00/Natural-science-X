@@ -44,6 +44,11 @@ class lang.Objects {
 	
 		proto.defunc = function() { return this }
 		
+		proto.funcWrap = function() { 
+			var _this = this
+			return function(){ return _this } 
+		}
+		
 		_global.ASSetPropFlags(proto, null, 0x7)
 
 	}

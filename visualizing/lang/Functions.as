@@ -7,6 +7,8 @@ class lang.Functions {
 		
 		proto.defunc = function() { return this.apply(this, arguments) }
 		
+		proto.funcWrap = function() { return this }
+		
 		proto.override = function(obj: Object, prop: String) {
 			var old = obj[prop]
 			var _this = this

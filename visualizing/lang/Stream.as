@@ -68,8 +68,8 @@
 		return new Stream(r)
 	}
 	
-	static function generate(num:Number, generator:Function):Stream {
-		return new Stream(new Array(num)).map(generator)
+	static function generate(num:Number, generator):Stream { 
+		return new Stream(new Array(num)).map(generator.funcWrap())
 	}
 	
 	static function iterate(seed, next: Function, num: Number): Stream {

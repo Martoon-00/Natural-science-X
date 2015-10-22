@@ -42,7 +42,6 @@ public class SolutionResource {
     ) {
         try {
             StringBuilder answer = new StringBuilder();
-
             for (String method : methods.split(",")) {
                 Solver solver = RegisteredSolvers.solvers.get(method);
                 if (solver == null)

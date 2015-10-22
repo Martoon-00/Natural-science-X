@@ -4,6 +4,7 @@ import globals.*
 
 class SolutionKeeper {
 	private static var CHECK_DELAY: Number = 100
+	private static var LOAD_LIMIT: Number = 9999
 	private var BLOCK_SIZE: Number
 	
 	private var request: Request
@@ -32,6 +33,7 @@ class SolutionKeeper {
 	}
 	
 	function check(): Void { 
+		if (data.length > LOAD_LIMIT) return
 		var _this = this
 		
 		var p = params.copy({ 

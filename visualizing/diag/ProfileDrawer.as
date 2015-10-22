@@ -14,6 +14,9 @@ class diag.ProfileDrawer extends MovieClip {
 	private var xs: Array
 	private var ys: Array
 	
+	private var ysDrawn: Array
+	private var speed: Array
+	
 	private var lastMousePos: Coord
 	
 	public var close: Function
@@ -44,9 +47,11 @@ class diag.ProfileDrawer extends MovieClip {
 		
 		step = new ChangeWatcher()
 		step.onChange = function(){ _this.recount.apply(_this, arguments) }
-		xs = new Array(0, 1)
-		ys = new Array(0, 0)
-		draw()
+		this.set([0, 1], [0, 0])
+		
+		onEnterFrame = function(){
+			draw()
+		}
 		
 		close = new MouseListener().register({
 			onPress: function(){ 
@@ -64,7 +69,7 @@ class diag.ProfileDrawer extends MovieClip {
 			var xs = Range.UNIT.fill(newVal)
 			var ys = new Array()
 			
-			for (var i = xs_.length; i > 0; i--) {
+			for (var i = xs_.length; i >= 0; i--) {
 				xs_.push(xs_[xs_.length - 1] + oldVal)
 				ys_.push(ys_[ys_.length - 1])
 			}
@@ -75,8 +80,7 @@ class diag.ProfileDrawer extends MovieClip {
 			}
 			this.xs = xs
 			this.ys = ys
-			
-			draw()
+			this.ysDrawn = ys.copy(new Array())
 		} catch (e: Error) {
 			new Logger("stage").info(e.message)
 		}
@@ -104,17 +108,25 @@ class diag.ProfileDrawer extends MovieClip {
 	}
 	
 	function draw() {
+		if (ysDrawn.length != ys.length) ysDrawn = ys.copy(new Array())
+		if (speed.length != ys.length) speed = Stream.generate(ys.length, 0).toArray()
+		
+		for (var i = 0; i < ysDrawn.length; i++) {
+			ysDrawn[i] += (ys[i] - ysDrawn[i]) * 0.2
+		}
+		
 		diagram
 			.clear()
 			.draw(
 				function(dr){ dr.lineStyle(3, 0x0000FF) },
-				new Stream(xs).zipWith(new Stream(ys), function(x, y){ return new Coord(x, y) }).toArray()
+				new Stream(xs).zipWith(new Stream(ysDrawn), function(x, y){ return new Coord(x, y) }).toArray()
 			)
 	}
 	
 	function set(xs: Array, ys: Array): Void {
 		this.xs = xs
 		this.ys = ys
+		ysDrawn = ys.copy(new Array())
 		draw()
 	}
 	
