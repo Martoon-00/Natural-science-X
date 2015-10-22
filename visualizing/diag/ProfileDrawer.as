@@ -14,9 +14,11 @@ class diag.ProfileDrawer extends MovieClip {
 	private var xs: Array
 	private var ys: Array
 	
+	private var lastMousePos: Coord
+	
 	public var close: Function
 	
-	function ProfileDrawer(){
+	function ProfileDrawer(){ 
 		var _this = this
 		width = _width
 		height = _height
@@ -33,8 +35,11 @@ class diag.ProfileDrawer extends MovieClip {
 		diagram._width = width
 		diagram._height = height
 		
-		bg.onUnload = new MouseListener(bg).register({
-			onHold: function(){ _this.change() }											
+		bg.onUnload = new MouseListener().register({
+			onHold: function(){  
+				_this.change() 
+				_this.lastMousePos = new Coord(_this._xmouse, _this._ymouse)
+			}											
 		})
 		
 		step = new ChangeWatcher()
@@ -44,7 +49,10 @@ class diag.ProfileDrawer extends MovieClip {
 		draw()
 		
 		close = new MouseListener().register({
-			onPress: function(){ _this.step.get() }	 
+			onPress: function(){ 
+				_this.step.get() 
+				_this.lastMousePos = new Coord(_this._xmouse, _this._ymouse)
+			}	 
 		})
 		
 	}
@@ -78,18 +86,24 @@ class diag.ProfileDrawer extends MovieClip {
 		step.getter = f
 	}
 	
-	function change() {
-		if (_xmouse < 0 || _xmouse > width || -_ymouse < 0 || -_ymouse > height)
-			return;
-			
-		var d = step.get()
-		var index = Math.round(_xmouse / width / d)
-		ys[index] = -_ymouse / height
+	function change() { 
+		function lim(k: Number){ return isNaN(k) || Math.abs(k) == Number.POSITIVE_INFINITY ? 1 : k }
 		
+		var mouse = new Coord(_xmouse, _ymouse)
+		var d = step.get() * width
+		var last = lastMousePos
+		new Range(last.x, mouse.x).map(function(k){ return Math.round(k / d) * d }).iterate(function(x: Number){    
+			var y = (mouse.y - last.y) * lim((x - last.x) / (mouse.x - last.x)) + last.y
+			if (x < 0 || x > width || -y < 0 || -y > height)
+				return;
+				
+			var index = x / d
+			ys[index] = -y / height
+		}.withThis(this), d)
 		draw()
 	}
 	
-	function draw() { 
+	function draw() {
 		diagram
 			.clear()
 			.draw(

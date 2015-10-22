@@ -33,23 +33,25 @@ class lang.Range {
 		var r = intersect(RAY)
 		return r.isEmpty() ? r : new Range(Math.sqrt(r.a), Math.sqrt(r.b))
 	}
+	function map(f: Function): Range {
+		return new Range(f(a), f(b))
+	}
 	function add(r: Range): Range { return new Range(Math.min(a, b) + Math.min(r.a, r.b), Math.max(a, b) + Math.max(r.a, r.b)) }
 	function sub(r: Range): Range { return add(r.times(-1)) }
 	function sqr(r: Range): Range { return a * b >= 0 ? new Range(a * a, b * b).norm() : new Range(0, Math.max(a * a, b * b)) }
 	
 	function intersect(other: Range) { return new Range(Math.max(a, other.a), Math.min(b, other.b)).check() }
 	
-	function iterate(f: Function): Void { 
+	function iterate(f: Function, step: Number): Void { 
 		if (isNaN(a / 1) || isNaN(b / 1)) throw new Error("Range.iterate accepted broken coordinates")
-		if (b > a) {
-			var q = Math.floor(a)
-			var w = Math.ceil(b)
-			for (var i = q; i <= w; i++) f(i) 
+		if (step <= 0) throw new Error("Range.iterate accepted a nonpositive step")
+		
+		if (step == undefined) step = 1
+		if (b > a) { 
+			for (var i = a; i <= b; i += step) f(i) 
 		}
 		else { 
-			var q = Math.ceil(a)
-			var w = Math.floor(b)
-			for (var i = q; i >= w; i--) f(i) 
+			for (var i = a; i >= b; i -= step) f(i) 
 		}
 	}
 	

@@ -15,6 +15,11 @@ class lang.Functions {
 			}
 		}
 		
+		proto.withThis = function(_this) {
+			var f = this
+			return function(){ return f.apply(_this, arguments) }
+		}
+		
 		_global.ASSetPropFlags(proto, null, 0x7)
 		
 		_global.traceAll = function(){ trace(arguments.join("  ")) }
