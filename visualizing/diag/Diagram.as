@@ -9,6 +9,8 @@ class diag.Diagram extends MovieClip {
 	var xAxisName: String = "x"
 	var yAxisName: String = "y"
 	
+	var gridParts: Number = 10
+	
 	var field: MovieClip
 	
 	function Diagram(){
@@ -34,7 +36,6 @@ class diag.Diagram extends MovieClip {
 		var yAxis = createEmptyMovieClip("yAxis", 21)
 		
 		// grid
-		var gridParts = 10
 		var gridAlpha = 30
 		xAxis.lineStyle(1, 0x00FF00, gridAlpha)
 		for (var i = 1; i < gridParts; i++) { 
@@ -85,6 +86,7 @@ class diag.Diagram extends MovieClip {
 		function tuneAxisText(txt: TextField) {
 			txt.autoSize = true
 			txt.setNewTextFormat(axisNameFormat)
+			txt.selectable = false
 		}
 			
 		var xText = xAxis.createTextField("axisName", 10, size.x + 5, 0, 20, 20)

@@ -3,7 +3,7 @@ import net.*
 import globals.*
 
 class SolutionKeeper {
-	private static var CHECK_DELAY: Number = 300
+	private static var CHECK_DELAY: Number = 100
 	private var BLOCK_SIZE: Number
 	
 	private var request: Request
@@ -24,7 +24,7 @@ class SolutionKeeper {
 		
 		this.methods = methods
 		data = new Array()
-		BLOCK_SIZE = 50 / methods.length
+		BLOCK_SIZE = int(200 / methods.length / (0.1 / params.dx))
 		
 		onUpdate = new Listener()
 		
