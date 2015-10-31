@@ -15,6 +15,7 @@ public class RegisteredSolvers {
         solvers.put("Square 2", new LolApproximator(0.1, a -> Math.pow(a, 0.5)));
         solvers.put("Tan", new LolApproximator(0.1, Math::tan));
         solvers.put("Fluctuations", new LolApproximator(1e-3, a -> Math.exp(a * 5) * 10000 * Math.sin(a * 20)));
+        solvers.put("Explicit up stream", new ExplicitUpStream());
     }
 
 }

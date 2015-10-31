@@ -1,6 +1,5 @@
 package ru.ifmo.data;
 
-import javafx.util.Pair;
 
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +31,10 @@ public class InitialConditions implements Iterable<Pair<Double, Double>> {
 
     public Stream<Pair<Double, Double>> data() {
         return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    public int size() {
+        return xs.size();
     }
 
     @Override
