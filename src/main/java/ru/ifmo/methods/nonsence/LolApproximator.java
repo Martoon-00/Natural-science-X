@@ -1,7 +1,7 @@
 package ru.ifmo.methods.nonsence;
 
-import javafx.util.Pair;
 import ru.ifmo.data.InitialConditions;
+import ru.ifmo.data.Pair;
 import ru.ifmo.data.Parameters;
 import ru.ifmo.methods.Solver;
 
