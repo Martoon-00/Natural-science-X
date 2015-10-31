@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * In the course of time x(t) is getting more similar to f
+ * Pseudo-method. In the course of time T(x) gets more similar to f
  */
-public class LolAppriximator implements Solver {
+public class LolApproximator implements Solver {
 
     private final double speed;
     private final Function<Double, Double> f;
 
-    public LolAppriximator(double speed, Function<Double, Double> f) {
+    public LolApproximator(double speed, Function<Double, Double> f) {
         this.speed = speed;
         this.f = f;
     }

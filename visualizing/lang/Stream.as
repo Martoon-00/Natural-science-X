@@ -86,4 +86,8 @@
 	static function CALL(f: Function) {
 		return f()
 	}
+	
+	static function GETTER(prop: String) {
+		return function(v){ return v[prop] }
+	}
 }

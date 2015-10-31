@@ -25,7 +25,7 @@ class SolutionKeeper {
 		
 		this.methods = methods
 		data = new Array()
-		BLOCK_SIZE = int(200 / methods.length / (0.1 / params.dx))
+		BLOCK_SIZE = Math.max(int(200 / methods.length / (0.1 / params.dx)), 1)
 		
 		onUpdate = new Listener()
 		

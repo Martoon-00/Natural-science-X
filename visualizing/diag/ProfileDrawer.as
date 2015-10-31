@@ -121,6 +121,7 @@ class diag.ProfileDrawer extends MovieClip {
 				function(dr){ dr.lineStyle(3, 0x0000FF) },
 				new Stream(xs).zipWith(new Stream(ysDrawn), function(x, y){ return new Coord(x, y) }).toArray()
 			)
+			.commit()
 	}
 	
 	function set(xs: Array, ys: Array): Void {

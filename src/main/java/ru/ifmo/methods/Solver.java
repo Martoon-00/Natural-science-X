@@ -18,12 +18,12 @@ public interface Solver {
      * T(t, 0) = T(0, 0)      (for all t)
      * T(t, x_n) = T(0, x_n)  (for all t)
      * <p>
-     * Profile of initial T is given in <tt>init </tt> parameter
+     * Profile of initial T is given in <tt>init</tt> parameter
      *
      * @param init   keeps pairs (x, T(0, x))
      * @param number number of t for which T would be counted
      * @param params dx, dt, u, kappa
-     * @return discrete arraylist representation of T(t, x)
+     * @return arraylist discrete representation of T(t, x)
      */
     List<List<Double>> solve(InitialConditions init, int number, Parameters params);
 }

@@ -103,4 +103,6 @@ class lang.Drawer {
 	    curveTo(r, -Math.tan(Math.PI/8)*r, r, 0);
 		return this	
 	}
-}
+	
+	function toString(): String { return Strings.format("[Drawer %s]", mc) }
+} 
