@@ -16,7 +16,7 @@ class SolutionKeeper {
 	private var data: Array
 	private var methods: Array
 	
-	function SolutionKeeper(request: Request, methods: Array, params: Object){
+	function SolutionKeeper(request: Request, methods: Array, params: Object){ 
 		var _this = this
 		if (params == undefined)
 			throw new Error("Passed undefined parameters in SolutionKeeper constructor")
@@ -60,7 +60,7 @@ class SolutionKeeper {
 			}
 		}
 		
-		if (data.length > dataSize){
+		if (data.length > dataSize){ 
 			onUpdate.invoke(data.length)
 		}
 	}

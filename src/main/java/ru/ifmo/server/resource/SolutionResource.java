@@ -31,7 +31,8 @@ public class SolutionResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String solve(
             @QueryParam("methods") String methods,
-            @QueryParam("xs") String xs,
+            @QueryParam("x0") double x0,
+            @QueryParam("xn") double xn,
             @QueryParam("bound") String bound,
             @QueryParam("from") int from,
             @QueryParam("num") int num,
@@ -47,7 +48,7 @@ public class SolutionResource {
                 if (solver == null)
                     throw new IllegalArgumentException(String.format("'%s' method is not registered", method));
 
-                List<List<Double>> solution = solver.solve(new InitialConditions(ServerHelper.parseDoubles(xs), ServerHelper.parseDoubles(bound)), from + num, new Parameters(dt, dx, u, kappa))
+                List<List<Double>> solution = solver.solve(new InitialConditions(x0, xn, dx, ServerHelper.parseDoubles(bound)), from + num, new Parameters(dt, dx, u, kappa))
                         .subList(from, from + num);
 
                 answer.append(ServerHelper.solutionToString(solution))

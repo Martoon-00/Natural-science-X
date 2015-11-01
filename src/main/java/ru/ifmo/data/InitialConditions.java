@@ -3,6 +3,7 @@ package ru.ifmo.data;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -22,6 +23,18 @@ public class InitialConditions implements Iterable<Pair<Double, Double>> {
             throw new IllegalArgumentException("x and y packs have different sizes");
 
         this.xs = xs;
+        this.ys = ys;
+    }
+
+    public InitialConditions(double xStart, double xEnd, double xStep, List<Double> ys) {
+        xs = Stream.iterate(xStart, a -> a + xStep)
+                .limit(ys.size())
+                .collect(Collectors.toList());
+
+        Double xLast = xs.get(xs.size() - 1);
+        if (Math.abs(xLast - xEnd) > xStep) {
+            throw new IllegalStateException(String.format("Expected x end is near %f, but %f gained", xLast, xEnd));
+        }
         this.ys = ys;
     }
 

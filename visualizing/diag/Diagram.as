@@ -136,8 +136,15 @@ class diag.Diagram extends MovieClip {
 		
 		// axis coords text
 		var cutDouble = function(k){
-			var s = String(k).slice(0, 4)
-			if (s.charAt(s.length - 1) == ".") s = s.slice(0, -1)
+			var s: String = String(k)
+			var a = s.indexOf(".")
+			var b = s.indexOf("e")
+			if (a != -1 && b != -1 && b - a > 2) 
+				s = s.slice(0, a + 3) + s.slice(b)
+			else if (a != -1) {
+				if (a > 4) s = s.slice(0, a)
+				else s = s.slice(0, 4)
+			}
 			return s
 		}
 		var tuneCoordText = function(txt: TextField, align) {
@@ -177,6 +184,14 @@ class diag.Diagram extends MovieClip {
 	
 	function commit(): Diagram {
 		if (toDraw.length == 0) return;
+		var bad = false
+		toDraw.forEach(function(i, d){ 
+			d.points.forEach(function(i, p){ 
+				bad = bad || p.isBroken()
+			})
+		})
+		if (bad) return
+		
 		var _this = this
 		
 		var allPoints = new Array()
