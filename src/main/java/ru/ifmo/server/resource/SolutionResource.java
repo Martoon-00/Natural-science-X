@@ -65,13 +65,4 @@ public class SolutionResource {
         }
     }
 
-
-//    @GET
-//    @Path("crossdomain.xml")
-//    @Produces(MediaType.APPLICATION_XML)
-//    public String crossdomain() {
-//        return "<cross-domain-policy>\n" +
-//                "<allow-access-from domain=\"*\" to-ports=\"1234\"/>\n" +
-//                "</cross-domain-policy>";
-//    }
 }
