@@ -1,5 +1,7 @@
 package ru.ifmo.methods;
 
+import ru.ifmo.methods.implicit.ImplicitFromStream;
+import ru.ifmo.methods.implicit.ImplicitOnStream;
 import ru.ifmo.methods.nonsence.LolApproximator;
 
 import java.util.Map;
@@ -13,6 +15,8 @@ public class RegisteredSolvers {
         solvers.put("Explicit up stream", new ExplicitUpStream());
         solvers.put("Explicit down stream", new ExplicitDownStream());
         solvers.put("Chekharda", new Chekharda());
+        solvers.put("ImplicitFromStream", new ImplicitFromStream());
+        solvers.put("ImplicitOnStream", new ImplicitOnStream());
     }
 
 }
