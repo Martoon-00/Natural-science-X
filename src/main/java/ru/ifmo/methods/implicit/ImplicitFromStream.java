@@ -1,11 +1,9 @@
 package ru.ifmo.methods.implicit;
 
 import ru.ifmo.data.InitialConditions;
-import ru.ifmo.data.Pair;
 import ru.ifmo.data.Parameters;
 import ru.ifmo.methods.Solver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +18,6 @@ public class ImplicitFromStream implements Solver {
 		double alpha = -(s * r), beta = -(1 + s + 2 * r), gamma = -r;
 
 
-		return CommonImplicit.commonSolver(alpha,beta,gamma,init,number,params);
+		return CommonImplicit.commonSolver(alpha, beta, gamma, init, number, params);
 	}
 }
