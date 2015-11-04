@@ -32,17 +32,16 @@ public class CommonImplicit {
 				p[i] = gamma / (beta - alpha * p[i - 1]);
 				q[i] = (alpha * q[i - 1] - T.get(n).get(i)) / (beta - alpha * p[i - 1]);
 			}
-			double x = (alpha * q[size - 2] - T.get(n).get(size - 1)) / (beta - alpha * p[size - 2]);
-
+			//double x = (alpha * q[size - 2] - T.get(n).get(size - 1)) / (beta - alpha * p[size - 2]);
+			double x = initial.get(size - 1);
 			ts.add(0, x);
-			for (int i = size - 2; i >= 0; i--) {
+			for (int i = size - 2; i > 0; i--) {
 				x = p[i] * x + q[i];
 				ts.add(0, x);
 			}
-
+			ts.add(0,initial.get(0));
 			T.add(ts);
 		}
-
 		return T;
 	}
 }
