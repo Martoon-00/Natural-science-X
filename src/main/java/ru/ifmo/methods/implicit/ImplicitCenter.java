@@ -15,7 +15,7 @@ public class ImplicitCenter implements Solver {
 		double s = params.u * params.dt / params.dx;
 		double r = params.kappa * params.dt / (params.dx * params.dx);
 
-		double alpha = -(r * (s/2)), beta = -(1 + 2 * r), gamma = -(r - s / 2);
+		double alpha = -(r + (s/2)), beta = -(1 + 2 * r), gamma = -(r - (s / 2));
 
 		return CommonImplicit.commonSolver(alpha,beta,gamma,init,number,params);
 	}
