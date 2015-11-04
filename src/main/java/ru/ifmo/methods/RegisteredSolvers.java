@@ -1,5 +1,6 @@
 package ru.ifmo.methods;
 
+import ru.ifmo.methods.implicit.ImplicitCenter;
 import ru.ifmo.methods.implicit.ImplicitFromStream;
 import ru.ifmo.methods.implicit.ImplicitOnStream;
 import ru.ifmo.methods.nonsence.LolApproximator;
@@ -17,6 +18,7 @@ public class RegisteredSolvers {
         solvers.put("Chekharda", new Chekharda());
         solvers.put("ImplicitFromStream", new ImplicitFromStream());
         solvers.put("ImplicitOnStream", new ImplicitOnStream());
+        solvers.put("ImplicitCentral", new ImplicitCenter());
     }
 
 }
