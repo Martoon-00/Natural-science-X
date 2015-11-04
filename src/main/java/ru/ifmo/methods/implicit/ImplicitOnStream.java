@@ -19,6 +19,6 @@ public class ImplicitOnStream implements Solver {
 
 		double alpha = -r, beta = -(1 - s + 2 * r), gamma = s - r;
 
-		return CommonImplicit.commonSolver(alpha,beta,gamma,init,number,params);
+		return CommonImplicit.commonSolver(alpha, beta, gamma, init, number, params);
 	}
 }
