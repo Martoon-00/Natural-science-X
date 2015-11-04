@@ -15,7 +15,7 @@ public class ImplicitFromStream implements Solver {
 		double s = params.u * params.dt / params.dx;
 		double r = params.kappa * params.dt / (params.dx * params.dx);
 
-		double alpha = -(s * r), beta = -(1 + s + 2 * r), gamma = -r;
+		double alpha = -(s + r), beta = -(1 + s + 2 * r), gamma = -r;
 
 
 		return CommonImplicit.commonSolver(alpha, beta, gamma, init, number, params);
