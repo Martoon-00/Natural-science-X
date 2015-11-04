@@ -4,7 +4,7 @@ import diag.*
 import util.*
 
 class diag.ProfileDrawer extends MovieClip {
-	private var diagram: Diagram
+	var diagram: Diagram
 	
 	private var width: Number
 	private var height: Number
