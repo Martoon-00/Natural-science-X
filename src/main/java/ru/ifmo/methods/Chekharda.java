@@ -41,14 +41,18 @@ public class Chekharda implements Solver {
         double s = params.u * params.dt / params.dx;
         double r = params.kappa * params.dt / (params.dx * params.dx);
 
-        // first iteration like in Explicit Central Scheme
-        List<Double> secondRow = new ArrayList<>();
-        for (int i = 1; i < initial.size() - 1; ++i) {
-            secondRow.add(initial.get(i) * (1 - 2 * r)
+        if (number >= 1) {
+            // first iteration like in Explicit Central Scheme
+            List<Double> secondRow = new ArrayList<>();
+            secondRow.add(left);
+            for (int i = 1; i < initial.size() - 1; ++i) {
+                secondRow.add(initial.get(i) * (1 - 2 * r)
                         + initial.get(i - 1) * (r + s / 2)
                         + initial.get(i + 1) * (r - s / 2));
+            }
+            secondRow.add(right);
+            T.add(secondRow);
         }
-        T.add(secondRow);
 
         for (int i = 1; i < number; ++i) {
             List<Double> nextRow = new ArrayList<>();
