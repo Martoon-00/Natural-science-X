@@ -60,7 +60,7 @@ public class Chekharda implements Solver {
             for (int j = 1; j < xNum - 1; ++j) {
                 double v = T.get(i - 1).get(j)
                          - T.get(i).get(j) * 4 * r
-                         + T.get(i).get(j) * (2 * r + s)
+                         + T.get(i).get(j - 1) * (2 * r + s)
                          + T.get(i).get(j + 1) * (2 * r - s);
                 nextRow.add(v);
             }
